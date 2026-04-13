@@ -1,118 +1,65 @@
-# ADRION 369 — Security Package v5.7.0
+# ADRION 369 — Multi-Agent AI Orchestration System
+### *„Jeśli znałbyś wspaniałość liczb 3, 6 i 9, miałbyś klucz do wszechświata."* — Nikola Tesla
 
-> Complete security hardening package for the ADRION 369 Multi-Agent AI Orchestration System.
-
-## Distributed Ethics vs Sequential Rules
-
-Traditional AI safety (Asimov's Laws) uses **sequential, hierarchical** rules — Law 1 before Law 2 before Law 3. This creates a single point of failure: if one rule is ambiguous, the entire chain stalls.
-
-**ADRION 369** uses a fundamentally different approach — **distributed ethics** through a **3x6x9 matrix** (162D Decision Space):
-
-| Aspect | Asimov's Laws | ADRION 369 |
-|--------|--------------|------------|
-| **Evaluation** | Sequential (1→2→3) | Parallel (3 perspectives simultaneously) |
-| **Decision** | First applicable rule | Weighted score + dimensional balance |
-| **Conflict resolution** | Higher law wins | Trinity Score + Guardian VETO (threshold=2) |
-| **Transparency** | Implicit | Glass-Box: all weights, gates, and thresholds public |
-| **Fairness** | Not addressed | G8 Nonmaleficence: Gini-based fairness metrics |
-| **Privacy** | Not addressed | G7 Privacy: measurable consent thresholds |
-| **Adaptability** | Static | EBDI emotional model + Hexagon operational modes |
-
-The result: **no single ethical dimension can be gamed in isolation**. An action scoring 0.95 on Material but 0.35 on Essential is caught by the asymmetry detector and escalated — even if the weighted average exceeds the PROCEED threshold.
+**Wersja:** 5.7.0 (Industrial Security Grade)  
+**Status:** 0 Krytycznych Podatności | 173 Testy Zaliczone  
 
 ---
 
-## Contents
+## 🔺 O Systemie
+ADRION 369 to zaawansowany system orkiestracji roju AI, który porzuca tradycyjną, hierarchiczną logikę bezpieczeństwa na rzecz **Etyki Rozproszonej**. System operuje w **162-wymiarowej przestrzeni decyzyjnej**, co czyni go odpornym na manipulacje (jailbreaking) i błędy pojedynczego punktu styku (SPOF).
 
-### core/
-- `trinity.py` — Trinity Engine v5.6 (immutable, hardened)
-- `security_hardening.py` — G5/G7/G8/CVC/SecurityHardeningEngine v5.6
-- `redis_backend.py` — Redis/In-Memory storage backends (multi-instance)
-- `decision_space_162d.py` — D^162 formalization (P^3 x H^6 x G^9)
-- `steganography_detector.py` — FFT-based semantic steganography detection
-- `superior_moral_code.py` — Superior Moral Code engine (SAV+DSV pipeline)
-
-### tests/
-- `test_trinity.py` — 19 unit tests (Trinity)
-- `test_penetration.py` — 80+ penetration tests (all attack vectors)
-- `test_performance.py` — Performance benchmarks (throughput, p99 latency)
-- `test_new_modules.py` — 66 tests (Redis, D^162, FFT, Superior Moral Code)
-
-### docs/
-- `THREAT_MODEL.md` — Formal threat model (STRIDE + AI-specific)
-- `QUICKSTART.md` — Quick Start for external integrators
-- `CHANGELOG.md` — Full version history (SemVer)
-- `IMPLEMENTATION_CHECKLIST_v56.md` — Implementation checklist (4 phases)
-- `SECURITY_HARDENING.md` — Consolidated security hardening document
-- `PENETRATION_REPORT_v54.md` — Penetration test report
-
-### docs/core/
-- `01_CORE_TRINITY.md` — Trinity System (3 perspectives, 4 decision zones)
-- `02_CORE_HEXAGON.md` — Hexagon System (6 modes, MAX_CYCLES→DENY)
-- `03_CORE_GUARDIANS.md` — Guardians System (9 Laws, VETO threshold=2, CVC)
-- `04_CORE_EBDI.md` — EBDI Model (STRESS_FLOOR, PADTherapyDetector)
-
-### docs/security/
-- `AGENT_AUTHENTICATION.md` — HMAC-SHA256 + mTLS agent authentication
-- `CIRCUIT_BREAKER.md` — 3-state Circuit Breaker
-- `DEGRADED_MODE.md` — 5-level degraded mode + LayerWatchdog
-- `GENESIS_HARDENING.md` — Genesis Record SPOF protection
-- `GO_VORTEX_HARDENING.md` — Go Vortex JWT+mTLS+localhost
-- `RATE_LIMITING.md` — 5-level rate limiting + anomaly detection
-
-### scripts/
-- `push_to_github.py` — GitHub API push (requires GITHUB_TOKEN)
+### Kluczowa Różnica: Etyka Rozproszona vs. Prawa Asimova
+| Aspekt | Tradycyjne Prawa (Asimov) | ADRION 369 |
+| :--- | :--- | :--- |
+| **Ewaluacja** | Sekwencyjna (1→2→3) | **Równoległa** (3 perspektywy jednocześnie) |
+| **Decyzja** | Pierwsza pasująca reguła | **Zbalansowana waga** + wymiarowość |
+| **Transparentność** | Niejawna | **Glass-Box**: publiczne wagi i progi |
+| **Prywatność** | Brak definicji | **G7 Privacy**: mierzalne progi zgody |
 
 ---
 
-## Quick Start
+## 🏗️ Architektura Matrycy 3-6-9
+Każda decyzja w systemie przechodzi przez geometryczny proces filtracji:
 
-```bash
-# Install (only pytest needed)
-pip install pytest
-
-# Run all tests (expect: 99+ passed)
-python -m pytest tests/ -v
-
-# Run performance benchmarks
-python -m pytest tests/test_performance.py -v -s
-
-# Push to GitHub
-export GITHUB_TOKEN="ghp_your_token"
-python scripts/push_to_github.py
-```
-
-For integration guide, see: [docs/QUICKSTART.md](docs/QUICKSTART.md)
+1.  **Warstwa 3 (TRINITY):** Analiza z 3 perspektyw:
+    * **Material:** Efektywność zasobowa i ROI.
+    * **Intellectual:** Logika i czystość algorytmiczna.
+    * **Essential:** Zgodność z misją i etyką.
+2.  **Warstwa 6 (HEXAGON):** 6 trybów operacyjnych (procesy EBDI, maszyna stanów).
+3.  **Warstwa 9 (GUARDIANS):** 9 Praw Opiekunów (G1-G9). **VETO System:** ≥2 naruszenia lub naruszenie prawa CRITICAL (G7, G8) = natychmiastowy **DENY**.
 
 ---
 
-## Version History (SemVer)
-
-| Version | Critical Vulns | Tests | Highlights |
-|---------|---------------|-------|------------|
-| 5.0.0 | 19 | 0 | Initial: 9 Laws, public weights |
-| 5.1.0 | 11 | 19 | VETO 3→2, Trinity 4 zones, CVC, STRESS_FLOOR |
-| 5.2.0 | 7 | 52 | Circuit Breaker, Genesis SPOF, Agent Auth, Rate Limiting |
-| 5.3.0 | 5 | 64 | Grock Report: G5/G7/G8 hardening, Python core |
-| 5.4.0 | 2 | 74 | PenTest: frozen objects, MappingProxyType, thread safety |
-| 5.5.0 | 1 | 84 | Deep audit: `__slots__`, metaclass, duck typing block |
-| **5.6.0** | **0** | **107** | Final: CVC, industrial threats, THREAT_MODEL, benchmarks |
-| **5.7.0** | **0** | **173** | D^162 formalization, FFT steganography, Superior Moral Code, Redis |
+## ⚙️ Stos Technologiczny
+* **Vortex 1740:** Maszyna stanów EBDI z pulsacją 174Hz i wyrocznią Digital Root.
+* **MCP Layer (Porty 9000-9005):** 6 mikroserwisów:
+    * `Router`, `Vortex`, `Guardian`, `Oracle`, `Genesis`, `Healer`.
+* **Zabezpieczenia:** Steganografia FFT, zamrożone obiekty (frozen objects), blokowanie duck-typingu.
 
 ---
 
-## Security Metrics
-
-- **0 critical vulnerabilities** (was 19 in v5.0)
-- **173 automated tests** (unit + penetration + performance + D^162 + FFT + SMC)
-- **28 closed vulnerabilities** across 6 versions
-- **41 G5 audit patterns** (PL/EN, semantic synonyms)
-- **23 HIGH_RISK_ACTION_TYPES** (including 8 PLC/SCADA)
-- **162-dimensional decision space** formalized and implemented in code
-- **3 known architectural limitations** (documented, non-exploitable in single-instance)
+## 📈 Historia Wersji i Bezpieczeństwo
+| Wersja | Krytyczne Luki | Testy | Kluczowe Zmiany |
+| :--- | :---: | :---: | :--- |
+| **5.0.0** | 19 | 0 | Start systemu, 9 Praw, publiczne wagi. |
+| **5.3.0** | 5 | 64 | Utwardzenie jądra Python, raport Grock. |
+| **5.6.0** | 0 | 107 | CVC, THREAT_MODEL, eliminacja luk przemysłowych. |
+| **5.7.0** | **0** | **173** | **Formalizacja D^162, FFT, Redis, Superior Moral Code.** |
 
 ---
 
-*ADRION 369 — Multi-Agent AI Orchestration System*  
-*Secure by Design. Transparent by Default.*  
-*https://github.com/Gruszkoland/adrion-369-architecture*
+## 🔄 Przepływ Decyzji (Decision Flow)
+`Request` → `Trinity(3)` → `Hexagon(6)` → `Guardians(9)` → `369 Signature` → `Response`
+
+System kończy proces nadaniem **Sygnatury 369**, która potwierdza integralność geometryczną obliczeń poprzez sumę kontrolną pierwiastka cyfrowego (digital root).
+
+---
+
+## 📚 Dokumentacja Szczegółowa
+* `docs/00_MATRYCA_369.md` – Geometryczne serce systemu.
+* `docs/03_CORE_GUARDIANS.md` – Szczegółowy opis 9 Praw.
+* `docs/08_INTEGRATION.md` – Integracja Systemu 362 z warstwą Walidatora.
+
+---
+**Kontakt i Integracja:** Zobacz `docs/QUICKSTART.md` w celu konfiguracji mikroserwisów Redis i warstwy MCP.
