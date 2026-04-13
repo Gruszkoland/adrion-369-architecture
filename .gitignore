@@ -1,44 +1,9 @@
-# Python
 __pycache__/
-*.py[cod]
-*.egg-info/
-dist/
-build/
-.eggs/
-*.egg
-venv/
+.pytest_cache/
 .venv/
-
-# Environment
-.env
-.env.*
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# OS
+venv/
+*.pyc
+*.pyo
+*.pyd
 .DS_Store
 Thumbs.db
-desktop.ini
-
-# Logs
-*.log
-
-# Coverage
-htmlcov/
-.coverage
-coverage.xml
-
-# Node
-node_modules/
-
-# Docker
-.docker/
-
-# Temp
-*.tmp
-*.bak
