@@ -20,7 +20,7 @@ REPO_OWNER   = "Gruszkoland"
 REPO_NAME    = "adrion-369-architecture"
 BRANCH       = "master"
 
-COMMIT_MSG_PREFIX = "security(v5.7): "
+COMMIT_MSG_PREFIX = "security(v5.7.1): "
 
 # Pliki: (lokalny path względem repo root, repo path na GitHubie)
 FILES = [
@@ -29,6 +29,7 @@ FILES = [
     (".gitignore",                                ".gitignore"),
     (".aiexclude",                                ".aiexclude"),
     ("VERSION",                                   "VERSION"),
+    ("GUARDIAN_LAWS_CANONICAL.json",              "GUARDIAN_LAWS_CANONICAL.json"),
     # Core
     ("core/trinity.py",                           "core/trinity.py"),
     ("core/security_hardening.py",                "core/security_hardening.py"),
@@ -36,11 +37,18 @@ FILES = [
     ("core/decision_space_162d.py",               "core/decision_space_162d.py"),
     ("core/steganography_detector.py",            "core/steganography_detector.py"),
     ("core/superior_moral_code.py",               "core/superior_moral_code.py"),
+    ("core/audit_trail.py",                       "core/audit_trail.py"),
+    ("core/escalation.py",                        "core/escalation.py"),
+    # Dashboard
+    ("dashboard/app.py",                          "dashboard/app.py"),
     # Tests
     ("tests/test_trinity.py",                     "tests/test_trinity.py"),
     ("tests/test_penetration.py",                 "tests/test_penetration.py"),
     ("tests/test_performance.py",                 "tests/test_performance.py"),
     ("tests/test_new_modules.py",                 "tests/test_new_modules.py"),
+    ("tests/test_stress_redis.py",                "tests/test_stress_redis.py"),
+    ("tests/test_audit_trail.py",                 "tests/test_audit_trail.py"),
+    ("tests/test_escalation.py",                  "tests/test_escalation.py"),
     # Docs — top level
     ("docs/CHANGELOG.md",                         "docs/CHANGELOG.md"),
     ("docs/IMPLEMENTATION_CHECKLIST_v56.md",      "docs/IMPLEMENTATION_CHECKLIST_v56.md"),
