@@ -20,6 +20,17 @@ Traditional AI safety (Asimov's Laws) uses **sequential, hierarchical** rules �
 
 The result: **no single ethical dimension can be gamed in isolation**. An action scoring 0.95 on Material but 0.35 on Essential is caught by the asymmetry detector and escalated — even if the weighted average exceeds the PROCEED threshold.
 
+### Resonance vs Hierarchy
+
+Classical ethics engines (Asimov, deontic rule-chains) operate by **hierarchy** — a fixed ordering where Rule 1 overrides Rule 2. ADRION 369 operates by **resonance**:
+
+- **Hierarchy** = sequential, brittle, single point of failure. If rule priority is wrong, the system fails silently.
+- **Resonance** = parallel evaluation across 162 dimensions. All 9 Guardian Laws are evaluated simultaneously and *must all pass* their thresholds. A decision "resonates" only when it satisfies the entire ethical field.
+
+This is analogous to the difference between a single-instrument melody (hierarchy) and a 9-instrument chord (resonance). A chord is harmonic only when every note is in tune. G8 Nonmaleficence at 0.95 threshold acts as the **fundamental frequency** — if it drops, the entire chord collapses into a HARD_VETO, regardless of how well other Guardians score.
+
+The 162D tensor product (P^3 x H^6 x G^9) makes this resonance mathematically verifiable: every decision is a point in R^162, and the Guardian projection functions g_m(d) measure alignment along each ethical axis.
+
 ---
 
 ## Contents
@@ -31,12 +42,19 @@ The result: **no single ethical dimension can be gamed in isolation**. An action
 - `decision_space_162d.py` — D^162 formalization (P^3 x H^6 x G^9)
 - `steganography_detector.py` — FFT-based semantic steganography detection
 - `superior_moral_code.py` — Superior Moral Code engine (SAV+DSV pipeline)
+- `audit_trail.py` — Blockchain-ready hash-chained audit trail (G5 compliance)
+- `escalation.py` — Human-in-the-loop escalation protocol (webhooks)
+
+### dashboard/
+- `app.py` — Trinity Sentinel Dashboard (Streamlit + Plotly)
 
 ### tests/
 - `test_trinity.py` — 19 unit tests (Trinity)
 - `test_penetration.py` — 80+ penetration tests (all attack vectors)
 - `test_performance.py` — Performance benchmarks (throughput, p99 latency)
 - `test_new_modules.py` — 66 tests (Redis, D^162, FFT, Superior Moral Code)
+- `test_audit_trail.py` — Audit trail tests (chain integrity, tamper detection, threading)
+- `test_escalation.py` — Escalation module tests (webhooks, callbacks, concurrency)
 
 ### docs/
 - `THREAT_MODEL.md` — Formal threat model (STRIDE + AI-specific)
@@ -98,13 +116,14 @@ For integration guide, see: [docs/QUICKSTART.md](docs/QUICKSTART.md)
 | 5.5.0 | 1 | 84 | Deep audit: `__slots__`, metaclass, duck typing block |
 | **5.6.0** | **0** | **107** | Final: CVC, industrial threats, THREAT_MODEL, benchmarks |
 | **5.7.0** | **0** | **173** | D^162 formalization, FFT steganography, Superior Moral Code, Redis |
+| **5.7.1** | **0** | **210+** | Audit Trail (blockchain), Escalation Protocol, Trinity Sentinel Dashboard |
 
 ---
 
 ## Security Metrics
 
 - **0 critical vulnerabilities** (was 19 in v5.0)
-- **173 automated tests** (unit + penetration + performance + D^162 + FFT + SMC)
+- **210+ automated tests** (unit + penetration + performance + D^162 + FFT + SMC + audit + escalation)
 - **28 closed vulnerabilities** across 6 versions
 - **41 G5 audit patterns** (PL/EN, semantic synonyms)
 - **23 HIGH_RISK_ACTION_TYPES** (including 8 PLC/SCADA)
