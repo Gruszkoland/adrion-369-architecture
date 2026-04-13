@@ -1,65 +1,125 @@
 # ADRION 369 — Multi-Agent AI Orchestration System
-### *„Jeśli znałbyś wspaniałość liczb 3, 6 i 9, miałbyś klucz do wszechświata."* — Nikola Tesla
+### *"If you only knew the magnificence of the 3, 6 and 9, then you would have the key to the universe."* — Nikola Tesla
 
-**Wersja:** 5.7.0 (Industrial Security Grade)  
-**Status:** 0 Krytycznych Podatności | 173 Testy Zaliczone  
+**Version:** 5.7.1 (Industrial Security Grade)  
+**Status:** 0 Critical Vulnerabilities | 243 Tests Passing  
+**Language:** [🇵🇱 Polski](README_PL.md)
 
 ---
 
-## 🔺 O Systemie
-ADRION 369 to zaawansowany system orkiestracji roju AI, który porzuca tradycyjną, hierarchiczną logikę bezpieczeństwa na rzecz **Etyki Rozproszonej**. System operuje w **162-wymiarowej przestrzeni decyzyjnej**, co czyni go odpornym na manipulacje (jailbreaking) i błędy pojedynczego punktu styku (SPOF).
+## 🔺 About
+ADRION 369 is an advanced AI swarm orchestration system that replaces traditional hierarchical safety logic with **Distributed Ethics**. The system operates in a **162-dimensional decision space**, making it resistant to manipulation (jailbreaking) and single-point-of-failure (SPOF) errors.
 
-### Kluczowa Różnica: Etyka Rozproszona vs. Prawa Asimova
-| Aspekt | Tradycyjne Prawa (Asimov) | ADRION 369 |
+### Key Difference: Distributed Ethics vs. Asimov's Laws
+| Aspect | Traditional Laws (Asimov) | ADRION 369 |
 | :--- | :--- | :--- |
-| **Ewaluacja** | Sekwencyjna (1→2→3) | **Równoległa** (3 perspektywy jednocześnie) |
-| **Decyzja** | Pierwsza pasująca reguła | **Zbalansowana waga** + wymiarowość |
-| **Transparentność** | Niejawna | **Glass-Box**: publiczne wagi i progi |
-| **Prywatność** | Brak definicji | **G7 Privacy**: mierzalne progi zgody |
+| **Evaluation** | Sequential (1→2→3) | **Parallel** (3 perspectives simultaneously) |
+| **Decision** | First matching rule | **Weighted balance** + dimensionality |
+| **Transparency** | Implicit | **Glass-Box**: public weights and thresholds |
+| **Privacy** | Undefined | **G7 Privacy**: measurable consent thresholds |
+| **Harm Prevention** | Single rule | **G8 Nonmaleficence**: hard veto at 0.95 |
 
 ---
 
-## 🏗️ Architektura Matrycy 3-6-9
-Każda decyzja w systemie przechodzi przez geometryczny proces filtracji:
+## 🏗️ The 3-6-9 Matrix Architecture
+Every decision passes through a geometric filtration process:
 
-1.  **Warstwa 3 (TRINITY):** Analiza z 3 perspektyw:
-    * **Material:** Efektywność zasobowa i ROI.
-    * **Intellectual:** Logika i czystość algorytmiczna.
-    * **Essential:** Zgodność z misją i etyką.
-2.  **Warstwa 6 (HEXAGON):** 6 trybów operacyjnych (procesy EBDI, maszyna stanów).
-3.  **Warstwa 9 (GUARDIANS):** 9 Praw Opiekunów (G1-G9). **VETO System:** ≥2 naruszenia lub naruszenie prawa CRITICAL (G7, G8) = natychmiastowy **DENY**.
+1.  **Layer 3 (TRINITY):** Analysis from 3 perspectives:
+    * **Material:** Resource efficiency and ROI.
+    * **Intellectual:** Logic and algorithmic purity.
+    * **Essential:** Alignment with mission and ethics.
+2.  **Layer 6 (HEXAGON):** 6 operational modes (EBDI processes, state machine):
+    * `Inventory` → `Empathy` → `Process` → `Debate` → `Healing` → `Action`
+3.  **Layer 9 (GUARDIANS):** 9 Guardian Laws (G1-G9). **VETO System:** ≥2 violations or any CRITICAL law breach (G7, G8) = immediate **DENY**.
+
+The tensor product **D^162 = P^3 ⊗ H^6 ⊗ G^9** maps every decision to a point in R^162, validated against all Guardian thresholds before execution.
 
 ---
 
-## ⚙️ Stos Technologiczny
-* **Vortex 1740:** Maszyna stanów EBDI z pulsacją 174Hz i wyrocznią Digital Root.
-* **MCP Layer (Porty 9000-9005):** 6 mikroserwisów:
+## ⚙️ Technology Stack
+
+### Core Modules (`core/`)
+| Module | Purpose |
+| :--- | :--- |
+| `trinity.py` | Trinity Engine — 3-perspective scoring with immutability hardening |
+| `decision_space_162d.py` | D^162 formalization — tensor product, Guardian projections, Skeptics Panel |
+| `security_hardening.py` | G5/G7/G8 compliance, CVC counter, SecurityHardeningEngine |
+| `superior_moral_code.py` | SAV+DSV pipeline — crisis modulation, dissonance detection, Genesis logging |
+| `audit_trail.py` | Blockchain-ready SHA-256 hash-chained audit trail (G5 Transparency) |
+| `escalation.py` | Human-in-the-loop escalation protocol — webhooks (Slack/Discord) |
+| `redis_backend.py` | Redis/In-Memory storage backends for multi-instance deployments |
+| `steganography_detector.py` | Pure Python FFT-based semantic steganography detection |
+
+### Infrastructure
+* **Vortex 1740:** EBDI state machine with 174Hz pulsation and Digital Root oracle.
+* **MCP Layer (Ports 9000-9005):** 6 microservices:
     * `Router`, `Vortex`, `Guardian`, `Oracle`, `Genesis`, `Healer`.
-* **Zabezpieczenia:** Steganografia FFT, zamrożone obiekty (frozen objects), blokowanie duck-typingu.
+* **Dashboard:** Streamlit + Plotly monitoring (`dashboard/app.py`) — Guardian radar, decision distribution, escalation log.
+
+### Security Features
+* Frozen objects (`MappingProxyType`, `__slots__`)
+* Metaclass subclassing prevention
+* Duck-typing and monkeypatch blocking
+* FFT steganography detection (pure Python, no numpy)
+* Hash-chained audit trail with tamper detection
 
 ---
 
-## 📈 Historia Wersji i Bezpieczeństwo
-| Wersja | Krytyczne Luki | Testy | Kluczowe Zmiany |
+## 📈 Version History
+| Version | Critical Vulns | Tests | Key Changes |
 | :--- | :---: | :---: | :--- |
-| **5.0.0** | 19 | 0 | Start systemu, 9 Praw, publiczne wagi. |
-| **5.3.0** | 5 | 64 | Utwardzenie jądra Python, raport Grock. |
-| **5.6.0** | 0 | 107 | CVC, THREAT_MODEL, eliminacja luk przemysłowych. |
-| **5.7.0** | **0** | **173** | **Formalizacja D^162, FFT, Redis, Superior Moral Code.** |
+| **5.0.0** | 19 | 0 | Initial system, 9 Laws, public weights. |
+| **5.3.0** | 5 | 64 | Python core hardening, Grock report. |
+| **5.6.0** | 0 | 107 | CVC, THREAT_MODEL, industrial vulnerability elimination. |
+| **5.7.0** | 0 | 173 | D^162 formalization, FFT steganography, Redis, Superior Moral Code. |
+| **5.7.1** | **0** | **243** | **Audit Trail (blockchain), Escalation Protocol, Trinity Sentinel Dashboard.** |
 
 ---
 
-## 🔄 Przepływ Decyzji (Decision Flow)
-`Request` → `Trinity(3)` → `Hexagon(6)` → `Guardians(9)` → `369 Signature` → `Response`
+## 🔄 Decision Flow
+```
+Request → Trinity(3) → Hexagon(6) → Guardians(9) → 369 Signature → Response
+```
 
-System kończy proces nadaniem **Sygnatury 369**, która potwierdza integralność geometryczną obliczeń poprzez sumę kontrolną pierwiastka cyfrowego (digital root).
+The process concludes with a **369 Signature** that confirms the geometric integrity of computations via a digital root checksum.
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# Install
+pip install pytest
+
+# Run all tests
+python -m pytest tests/ -v
+
+# Run stress tests
+python -m pytest tests/test_stress_redis.py -v -s
+
+# Launch dashboard (requires: pip install streamlit plotly)
+streamlit run dashboard/app.py
+
+# Push to GitHub
+export GITHUB_TOKEN="ghp_your_token"
+python scripts/push_to_github.py
+```
 
 ---
 
-## 📚 Dokumentacja Szczegółowa
-* `docs/00_MATRYCA_369.md` – Geometryczne serce systemu.
-* `docs/03_CORE_GUARDIANS.md` – Szczegółowy opis 9 Praw.
-* `docs/08_INTEGRATION.md` – Integracja Systemu 362 z warstwą Walidatora.
+## 📚 Documentation
+| File | Description |
+| :--- | :--- |
+| `docs/core/01_CORE_TRINITY.md` | Trinity System — 3 perspectives, 4 decision zones |
+| `docs/core/02_CORE_HEXAGON.md` | Hexagon System — 6 modes, MAX_CYCLES→DENY |
+| `docs/core/03_CORE_GUARDIANS.md` | Guardian System — 9 Laws, VETO threshold=2, CVC |
+| `docs/core/04_CORE_EBDI.md` | EBDI Model — STRESS_FLOOR, PADTherapyDetector |
+| `docs/THREAT_MODEL.md` | Formal threat model (STRIDE + AI-specific) |
+| `docs/QUICKSTART.md` | Integration guide for Redis and MCP layer |
+| `GUARDIAN_LAWS_CANONICAL.json` | Single source of truth for all 9 Guardian Laws + D^162 mapping |
 
 ---
-**Kontakt i Integracja:** Zobacz `docs/QUICKSTART.md` w celu konfiguracji mikroserwisów Redis i warstwy MCP.
+
+*ADRION 369 — Multi-Agent AI Orchestration System*  
+*Secure by Design. Transparent by Default.*  
+*https://github.com/Gruszkoland/adrion-369-architecture*
