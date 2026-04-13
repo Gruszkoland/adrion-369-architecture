@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "laws": [
     {
       "id": "G1",
@@ -46,5 +46,112 @@
       "name": "Sustainability",
       "description": "Operate within resource limits and preserve long-term system health"
     }
-  ]
+  ],
+  "mapping": {
+    "_comment": "Maps Guardian Laws to the 162-dimensional decision space D^162 = P^3 x H^6 x G^9",
+    "space": {
+      "total_dimensions": 162,
+      "trinity_axes": 3,
+      "hexagon_axes": 6,
+      "guardian_axes": 9,
+      "index_formula": "k = i * 54 + j * 9 + m  (i: Trinity 0-2, j: Hexagon 0-5, m: Guardian 0-8)"
+    },
+    "trinity": [
+      { "index": 0, "id": "Material",     "role": "LOGOS",  "weight": 0.33 },
+      { "index": 1, "id": "Intellectual",  "role": "ETHOS",  "weight": 0.34 },
+      { "index": 2, "id": "Essential",     "role": "EROS",   "weight": 0.33 }
+    ],
+    "hexagon": [
+      { "index": 0, "id": "Inventory", "phase": "input"    },
+      { "index": 1, "id": "Empathy",   "phase": "input"    },
+      { "index": 2, "id": "Process",   "phase": "compute"  },
+      { "index": 3, "id": "Debate",    "phase": "compute"  },
+      { "index": 4, "id": "Healing",   "phase": "feedback" },
+      { "index": 5, "id": "Action",    "phase": "output"   }
+    ],
+    "guardians": [
+      {
+        "index": 0,  "id": "G1", "label": "G1_Unity",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 0, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.15,
+        "projection": "g1(d) = 1 - (1/3) std({d_M, d_I, d_E}) * (1 - 0.2*P)"
+      },
+      {
+        "index": 1,  "id": "G2", "label": "G2_Harmony",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 1, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.15,
+        "projection": "g2(d) = 1 - max|d_Hj - d_Hk| * (1 + 0.15*A)"
+      },
+      {
+        "index": 2,  "id": "G3", "label": "G3_Rhythm",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 2, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.10,
+        "projection": "g3(d) = exp(-delta/0.35) * cos(2pi * (t mod 9)/9)"
+      },
+      {
+        "index": 3,  "id": "G4", "label": "G4_Causality",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 3, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.10,
+        "projection": "g4(d) = (1/18) sum d_k * I(hash_{t-1} consistent)"
+      },
+      {
+        "index": 4,  "id": "G5", "label": "G5_Transparency",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 4, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.25,
+        "projection": "g5(d) = (1/3)(score_C + score_B + score_K) * (1 + 0.25*D)"
+      },
+      {
+        "index": 5,  "id": "G6", "label": "G6_Authenticity",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 5, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.30,
+        "projection": "g6(d) = 1 - ||d_input - d_projected||_2 * (1 + 0.3*A)"
+      },
+      {
+        "index": 6,  "id": "G7", "label": "G7_Privacy",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 6, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.10,
+        "projection": "g7(d) = (1/18) sum d_k * I(no-external-call AND data-local)"
+      },
+      {
+        "index": 7,  "id": "G8", "label": "G8_Nonmaleficence",
+        "threshold": 0.95, "priority": "hard_veto",
+        "dimensions": { "start": 7, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.25,
+        "projection": "g8(d) = min(1, 1.2 * (1/18) sum d_k - 0.25*A)"
+      },
+      {
+        "index": 8,  "id": "G9", "label": "G9_Sustainability",
+        "threshold": 0.87, "priority": "standard",
+        "dimensions": { "start": 8, "stride": 9, "count": 18 },
+        "ebdi_alpha": 0.10,
+        "projection": "g9(d) = (1/18) sum d_k * exp(-resource_delta/1000)"
+      }
+    ],
+    "validation": {
+      "accept_condition": "forall m in 1..9: g_m(d) >= threshold_m",
+      "hard_veto": "G8 (threshold=0.95, immediate DENY on violation)",
+      "veto_count_threshold": 2,
+      "dissonance_threshold": 0.35,
+      "crisis_arousal_threshold": 0.7,
+      "crisis_compression": "d_t = d_t * (1 - 0.8 * A_t) when A > 0.7"
+    },
+    "skeptics_panel": {
+      "conservative": { "temperature": 0.1, "weight": 0.3 },
+      "balanced":     { "temperature": 0.5, "weight": 0.5 },
+      "creative":     { "temperature": 0.9, "weight": 0.2 },
+      "fusion": "d_final = 0.5*d_balanced + 0.3*d_conservative + 0.2*d_creative"
+    },
+    "transcendence_loop": {
+      "update_interval": 1000,
+      "learning_rate": 0.001,
+      "formula": "w_{t+N} = w_t + eta * grad_w(1/9 * sum g_m(d))"
+    }
+  }
 }
