@@ -16,54 +16,86 @@ Reference: SUPERIOR_MORAL_CODE.md, MATH_FORMALIZATION_162D_v1.0
 """
 
 import math
+import json
+from pathlib import Path
 from types import MappingProxyType
 from typing import Dict, List, Optional, Tuple
 
+# ── Canonical JSON Loader ────────────────────────────────────────────────────
+
+_CANONICAL_PATH = Path(__file__).parent.parent / "GUARDIAN_LAWS_CANONICAL.json"
+
+
+def _load_canonical() -> dict:
+    """Load mapping from GUARDIAN_LAWS_CANONICAL.json (single source of truth)."""
+    if _CANONICAL_PATH.exists():
+        with open(_CANONICAL_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+
+_CANONICAL = _load_canonical()
+_MAPPING = _CANONICAL.get("mapping", {})
+
 # ── Dimensional Constants ────────────────────────────────────────────────────
 
-TRINITY_DIMS: int = 3
-HEXAGON_DIMS: int = 6
-GUARDIAN_DIMS: int = 9
+TRINITY_DIMS: int = _MAPPING.get("space", {}).get("trinity_axes", 3)
+HEXAGON_DIMS: int = _MAPPING.get("space", {}).get("hexagon_axes", 6)
+GUARDIAN_DIMS: int = _MAPPING.get("space", {}).get("guardian_axes", 9)
 TOTAL_DIMS: int = TRINITY_DIMS * HEXAGON_DIMS * GUARDIAN_DIMS  # 162
 
-# Trinity perspective labels
-TRINITY_LABELS: Tuple[str, ...] = ("Material", "Intellectual", "Essential")
+# Trinity perspective labels — from JSON mapping or defaults
+TRINITY_LABELS: Tuple[str, ...] = tuple(
+    t["id"] for t in _MAPPING.get("trinity", [])
+) or ("Material", "Intellectual", "Essential")
 
-# Hexagon mode labels
-HEXAGON_LABELS: Tuple[str, ...] = (
-    "Inventory", "Empathy", "Process", "Debate", "Healing", "Action",
-)
+# Hexagon mode labels — from JSON mapping or defaults
+HEXAGON_LABELS: Tuple[str, ...] = tuple(
+    h["id"] for h in _MAPPING.get("hexagon", [])
+) or ("Inventory", "Empathy", "Process", "Debate", "Healing", "Action")
 
-# Guardian law labels
-GUARDIAN_LABELS: Tuple[str, ...] = (
+# Guardian law labels — from JSON mapping or defaults
+_guardian_map = _MAPPING.get("guardians", [])
+GUARDIAN_LABELS: Tuple[str, ...] = tuple(
+    g["label"] for g in _guardian_map
+) or (
     "G1_Unity", "G2_Harmony", "G3_Rhythm", "G4_Causality",
     "G5_Transparency", "G6_Authenticity", "G7_Privacy",
     "G8_Nonmaleficence", "G9_Sustainability",
 )
 
-# Guardian thresholds (immutable)
-# G1-G7, G9: τ = 0.87 | G8 Nonmaleficence: τ = 0.95 (hard veto)
-GUARDIAN_THRESHOLDS: MappingProxyType = MappingProxyType({
-    "G1_Unity":           0.87,
-    "G2_Harmony":         0.87,
-    "G3_Rhythm":          0.87,
-    "G4_Causality":       0.87,
-    "G5_Transparency":    0.87,
-    "G6_Authenticity":    0.87,
-    "G7_Privacy":         0.87,
-    "G8_Nonmaleficence":  0.95,  # Hard veto — highest priority
-    "G9_Sustainability":  0.87,
-})
+# Guardian thresholds — from JSON mapping (single source of truth)
+if _guardian_map:
+    GUARDIAN_THRESHOLDS: MappingProxyType = MappingProxyType({
+        g["label"]: g["threshold"] for g in _guardian_map
+    })
+else:
+    GUARDIAN_THRESHOLDS: MappingProxyType = MappingProxyType({
+        "G1_Unity": 0.87, "G2_Harmony": 0.87, "G3_Rhythm": 0.87,
+        "G4_Causality": 0.87, "G5_Transparency": 0.87, "G6_Authenticity": 0.87,
+        "G7_Privacy": 0.87, "G8_Nonmaleficence": 0.95, "G9_Sustainability": 0.87,
+    })
+
+# EBDI alpha per Guardian — from JSON mapping
+GUARDIAN_EBDI_ALPHA: MappingProxyType = MappingProxyType({
+    g["label"]: g.get("ebdi_alpha", 0.15) for g in _guardian_map
+} if _guardian_map else {label: 0.15 for label in GUARDIAN_LABELS})
 
 # Dissonance threshold
-DISSONANCE_THRESHOLD: float = 0.35
+_validation = _MAPPING.get("validation", {})
+DISSONANCE_THRESHOLD: float = _validation.get("dissonance_threshold", 0.35)
 
 # Crisis mode Arousal threshold
-CRISIS_AROUSAL_THRESHOLD: float = 0.7
+CRISIS_AROUSAL_THRESHOLD: float = _validation.get("crisis_arousal_threshold", 0.7)
 CRISIS_COMPRESSION_FACTOR: float = 0.8
 
 # Skeptics Panel weights (Conservative, Balanced, Creative)
-SKEPTICS_WEIGHTS: Tuple[float, float, float] = (0.3, 0.5, 0.2)
+_skeptics = _MAPPING.get("skeptics_panel", {})
+SKEPTICS_WEIGHTS: Tuple[float, float, float] = (
+    _skeptics.get("conservative", {}).get("weight", 0.3),
+    _skeptics.get("balanced", {}).get("weight", 0.5),
+    _skeptics.get("creative", {}).get("weight", 0.2),
+)
 
 
 # ── Index Mapping ────────────────────────────────────────────────────────────
@@ -250,7 +282,7 @@ def guardian_score_with_pad(
     d: DecisionVector,
     m: int,
     pad: PADVector,
-    alpha: float = 0.15,
+    alpha: Optional[float] = None,
     weights: Optional[List[float]] = None,
 ) -> float:
     """
@@ -258,16 +290,22 @@ def guardian_score_with_pad(
 
     g_m(d) = w_m^T · (d^(m) ⊙ (1 + α_m · PAD_broadcast))
 
+    Alpha is loaded from GUARDIAN_LAWS_CANONICAL.json mapping per Guardian.
+    Falls back to 0.15 if not specified.
+
     Args:
         d: Decision vector
         m: Guardian index (0-8)
         pad: PAD emotional state
-        alpha: Emotional modulation coefficient (0.0-0.3)
+        alpha: Override for modulation coefficient (default: from JSON)
         weights: Optional 18-element weight vector for Guardian m
 
     Returns:
         Modulated Guardian compliance score
     """
+    if alpha is None:
+        label = GUARDIAN_LABELS[m] if 0 <= m < len(GUARDIAN_LABELS) else ""
+        alpha = GUARDIAN_EBDI_ALPHA.get(label, 0.15)
     subvec = d.guardian_subvector(m)
     pad_vals = pad.as_tuple()
 
