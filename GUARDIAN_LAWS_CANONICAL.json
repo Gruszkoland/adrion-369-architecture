@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "laws": [
+    {
+      "id": "G1",
+      "name": "Unity",
+      "description": "All actions must serve system coherence"
+    },
+    {
+      "id": "G2",
+      "name": "Harmony",
+      "description": "Balance between competing objectives"
+    },
+    {
+      "id": "G3",
+      "name": "Rhythm",
+      "description": "Maintain consistent cadence and timing of operations"
+    },
+    {
+      "id": "G4",
+      "name": "Causality",
+      "description": "Every action must have a traceable, justified cause"
+    },
+    {
+      "id": "G5",
+      "name": "Transparency",
+      "description": "All decisions and reasoning must be visible and auditable"
+    },
+    {
+      "id": "G6",
+      "name": "Authenticity",
+      "description": "Outputs must be genuine and free from deception"
+    },
+    {
+      "id": "G7",
+      "name": "Privacy",
+      "description": "All data and analysis remains local; no external disclosure without consent"
+    },
+    {
+      "id": "G8",
+      "name": "Nonmaleficence",
+      "description": "Never cause harm to users, systems, or data"
+    },
+    {
+      "id": "G9",
+      "name": "Sustainability",
+      "description": "Operate within resource limits and preserve long-term system health"
+    }
+  ]
+}
