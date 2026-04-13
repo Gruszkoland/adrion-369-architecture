@@ -1,8 +1,0 @@
-# Exclude local environments, caches and generated noise from AI context.
-__pycache__/
-.pytest_cache/
-.venv/
-venv/
-*.pyc
-*.pyo
-*.pyd
